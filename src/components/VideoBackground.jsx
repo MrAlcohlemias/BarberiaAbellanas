@@ -1,12 +1,16 @@
-// 📄 VideoBackground.jsx
 import React, { useRef, useEffect, useState } from "react";
-import videoSrc from "../assets/videoBackground.mp4";
+import videoDesktop from "../assets/videoBackground.mp4";
+import videoMobile from "../assets/videoBackground-mobile.mp4";
 import "./VideoBackground.css";
 
 export default function VideoBackground({ play, onBlurEnd }) {
   const videoRef = useRef(null);
   const hasPlayedRef = useRef(false);
   const [blurActive, setBlurActive] = useState(false);
+
+  // Detectar si es móvil
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const videoSrc = isMobile ? videoMobile : videoDesktop;
 
   useEffect(() => {
     const video = videoRef.current;
